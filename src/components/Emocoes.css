@@ -1,0 +1,103 @@
+.emocoes-wrapper {
+    padding: 1rem;
+    text-align: center;
+    background-color: #fce4ec; /* rosa claro */
+    min-height: 30vh;
+    transition: background-color 0.5s ease;
+  }
+  
+  .emocoes-titulo {
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    color: #4a148c; /* roxo escuro */
+  }
+  
+  .emocoes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.25rem;
+    justify-items: center;
+  }
+  
+  .card-emocao {
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #ce93d8, #fff176); /* roxo + amarelo */
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    color: #4a148c;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-emocao:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(206, 147, 216, 0.4); /* sombra roxa suave */
+  }
+  
+  .emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .label {
+    font-size: 1rem;
+  }
+  
+  .sugestao-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #fff176; /* amarelo */
+    border-radius: 12px;
+    color: #4a148c;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .diario-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #ede7f6; /* roxo claro */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    color: #4a148c;
+  }
+  
+  .diario-textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: none;
+    font-size: 1rem;
+    margin-top: 1rem;
+    font-family: inherit;
+  }
+  
+  .diario-botao {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: #ce93d8; /* roxo médio */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .diario-botao:hover {
+    background-color: #ba68c8; /* roxo mais escuro */
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  

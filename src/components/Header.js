@@ -33,12 +33,12 @@ export default function Header({ usuario }) {
       "Estou aqui com você nesta manhã 🌅"
     ];
     const frasesTarde = [
-      "Boa tarde! Vamos conversar? 🌤️",
+      "Boa tarde! 🌤️",
       "Me conta como está sendo seu dia 💬",
       "Estou aqui com você nesta tarde 💛"
     ];
     const frasesNoite = [
-      "Boa noite! Você não está sozinha 🌙",
+      "Boa noite! Você não está sozinho 🌙",
       "Vamos desacelerar juntos 💆",
       "Estou aqui com você nesta noite 💙"
     ];

@@ -3,6 +3,8 @@ import Header from './components/Header';
 import Recomendacoes from './components/Recomendacoes';
 import Login from './components/Login';
 import PerfilDropdown from './components/PerfilDropdown';
+import Emocoes from './components/Emocoes';
+import YoutubeMusicPlayer from './components/YoutubeMusicPlayer';
 
 function App() {
   const [usuario, setUsuario] = useState(null);
@@ -98,6 +100,8 @@ function App() {
 
       {/* Conteúdo principal */}
       <Header usuario={usuario} atualizarHistorico={atualizarHistorico} />
+      <Emocoes />
+      <YoutubeMusicPlayer />
       <Recomendacoes />
     </div>
   );
