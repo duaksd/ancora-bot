@@ -1,0 +1,74 @@
+.perfil-dropdown {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 500;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.perfil-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+}
+
+.dropdown-conteudo {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  width: 260px;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.perfil-nome {
+  font-weight: bold;
+  color: #b03f6d;
+  margin-right: 0.5rem;
+}
+
+.perfil-email {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+button {
+  background-color: #b03f6d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  margin-top: 0.4rem;
+  cursor: pointer;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+button.excluir {
+  background-color: #f7d2d2;
+  color: #912b56;
+}
+
+.edicao input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.perfil-historico {
+  margin-top: 0.8rem;
+  font-size: 0.85rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
