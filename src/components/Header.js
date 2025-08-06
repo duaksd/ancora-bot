@@ -10,6 +10,7 @@ export default function Header({ usuario }) {
   const [chatVisivel, setChatVisivel] = useState(true);
   const [conversas, setConversas] = useState([]);
   const [esperandoRespostaContinuar, setEsperandoRespostaContinuar] = useState(false);
+  const [mensagemAcolhimento, setMensagemAcolhimento] = useState('');
 
   const audio = new Audio('/sounds/notificacao.mp3');
 
@@ -23,6 +24,34 @@ export default function Header({ usuario }) {
   useEffect(() => {
     localStorage.setItem('conversasBot', JSON.stringify(conversas));
   }, [conversas]);
+
+  const gerarMensagemAcolhimento = () => {
+    const hora = new Date().getHours();
+    const frasesManha = [
+      "Bom dia! Que seu dia seja leve ☀️",
+      "Comece o dia com calma 💙",
+      "Estou aqui com você nesta manhã 🌅"
+    ];
+    const frasesTarde = [
+      "Boa tarde! Vamos conversar? 🌤️",
+      "Me conta como está sendo seu dia 💬",
+      "Estou aqui com você nesta tarde 💛"
+    ];
+    const frasesNoite = [
+      "Boa noite! Você não está sozinha 🌙",
+      "Vamos desacelerar juntos 💆",
+      "Estou aqui com você nesta noite 💙"
+    ];
+
+    let frases;
+
+    if (hora >= 5 && hora < 12) frases = frasesManha;
+    else if (hora >= 12 && hora < 18) frases = frasesTarde;
+    else frases = frasesNoite;
+
+    const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+    return fraseAleatoria;
+  };
 
   const analisarMensagem = (texto) => {
     const msg = texto.toLowerCase();
@@ -95,6 +124,8 @@ export default function Header({ usuario }) {
 
     if (!chatAberto) {
       setChatAberto(true);
+      setMensagemAcolhimento(gerarMensagemAcolhimento());
+
       const historico = localStorage.getItem('conversasBot');
 
       if (historico && JSON.parse(historico).length > 0) {
@@ -148,8 +179,12 @@ export default function Header({ usuario }) {
         <div className="message-container">
           <img src="/assets/avatar.png" alt="Bot Avatar" className="bot-avatar" />
           <div className="bot-message">
-            <p>Olá! Você pode desabafar comigo a qualquer momento!</p>
-          </div>
+           <p>
+          {!chatAberto
+         ? "Olá! Você pode desabafar comigo a qualquer momento!"
+         : mensagemAcolhimento}
+          </p>
+</div>
         </div>
 
         {!chatAberto && (
@@ -166,9 +201,9 @@ export default function Header({ usuario }) {
                 }
               }}
             />
-          <button className="button icon-button" onClick={() => enviarMensagem(mensagemInicial, setMensagemInicial)}>
-        <GiAmmoniteFossil className="bot-icon" />
-        </button>
+            <button className="button icon-button" onClick={() => enviarMensagem(mensagemInicial, setMensagemInicial)}>
+              <GiAmmoniteFossil className="bot-icon" />
+            </button>
           </div>
         )}
 

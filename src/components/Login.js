@@ -14,7 +14,7 @@ export default function Login({ onLogin }) {
 
   return (
     <div style={styles.container}>
-      <h2>Bem-vinda ao Âncora Bot 💙</h2>
+      <h2>Bem-vindo(a) ao Âncora Bot 💙</h2>
       <input
         type="text"
         placeholder="Seu nome"
