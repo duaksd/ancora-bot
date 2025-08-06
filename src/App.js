@@ -3,16 +3,16 @@ import Header from './components/Header';
 import Recomendacoes from './components/Recomendacoes';
 import Login from './components/Login';
 import PerfilDropdown from './components/PerfilDropdown';
-import Emocoes from './components/Emocoes';
+import EmocoesPopup from './components/EmocoesPopup';
 import YoutubeMusicPlayer from './components/YoutubeMusicPlayer';
 
 function App() {
   const [usuario, setUsuario] = useState(null);
   const [mostrarLogin, setMostrarLogin] = useState(false);
+  const [mostrarPopupEmocao, setMostrarPopupEmocao] = useState(false);
   const [historico, setHistorico] = useState([]);
   const modalRef = useRef(null);
 
-  // Carrega dados salvos
   useEffect(() => {
     const dadosSalvos = localStorage.getItem('usuario');
     if (dadosSalvos) {
@@ -20,34 +20,30 @@ function App() {
     }
   }, []);
 
-  // Atualiza histórico emocional
   const atualizarHistorico = (analise) => {
     setHistorico(prev => [...prev, analise]);
   };
 
-  // Login
   const handleLogin = (dados) => {
     if (dados) {
-      localStorage.setItem('usuario', JSON.stringify(dados)); // salva no localStorage
+      localStorage.setItem('usuario', JSON.stringify(dados));
       setUsuario(dados);
+      setMostrarPopupEmocao(true); // mostra o popup ao logar
     }
     setMostrarLogin(false);
   };
 
-  // Logout
   const handleLogout = () => {
     localStorage.removeItem('usuario');
     setUsuario(null);
   };
 
-  // Apagar conta
   const handleDelete = () => {
     localStorage.removeItem('usuario');
     alert('Conta apagada com sucesso 💔');
     setUsuario(null);
   };
 
-  // Fechar modal ao clicar fora
   const handleClickForaModal = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {
       setMostrarLogin(false);
@@ -68,7 +64,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* Botão de login */}
       {!usuario && (
         <button
           onClick={() => setMostrarLogin(true)}
@@ -78,7 +73,6 @@ function App() {
         </button>
       )}
 
-      {/* Modal de login */}
       {mostrarLogin && !usuario && (
         <div style={modalEstilo}>
           <div ref={modalRef} style={modalConteudoEstilo}>
@@ -87,7 +81,6 @@ function App() {
         </div>
       )}
 
-      {/* Dropdown do perfil */}
       {usuario && (
         <PerfilDropdown
           usuario={usuario}
@@ -98,9 +91,10 @@ function App() {
         />
       )}
 
-      {/* Conteúdo principal */}
       <Header usuario={usuario} atualizarHistorico={atualizarHistorico} />
-      <Emocoes />
+      {mostrarPopupEmocao && (
+        <EmocoesPopup onClose={() => setMostrarPopupEmocao(false)} />
+      )}
       <YoutubeMusicPlayer />
       <Recomendacoes />
     </div>
@@ -108,7 +102,7 @@ function App() {
 }
 
 const botaoLoginEstilo = {
-  position: 'fixed', // fixo na tela, não relativo ao conteúdo
+  position: 'fixed',
   top: '1rem',
   right: '1rem',
   backgroundColor: '#b03f6d',
@@ -118,9 +112,9 @@ const botaoLoginEstilo = {
   padding: '0.5rem 1rem',
   cursor: 'pointer',
   zIndex: 200,
-  width: 'auto', // evita que ocupe largura total
-  maxWidth: '200px', // limite de largura
-  whiteSpace: 'nowrap' // evita quebra de linha
+  width: 'auto',
+  maxWidth: '200px',
+  whiteSpace: 'nowrap'
 };
 
 const modalEstilo = {
