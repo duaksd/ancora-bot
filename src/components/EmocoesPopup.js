@@ -1,84 +1,44 @@
-import { useState } from 'react';
-import './Emocoes.css';
+import React, { useState } from "react";
+import "./Emocoes.css";
 
 function EmocoesPopup({ onClose }) {
   const [emocaoSelecionada, setEmocaoSelecionada] = useState(null);
-  const [mostrarDiario, setMostrarDiario] = useState(false);
-  const [textoDiario, setTextoDiario] = useState('');
 
-  const emocoes = [
-    { emoji: '😊', label: 'Feliz' },
-    { emoji: '😢', label: 'Triste' },
-    { emoji: '😡', label: 'Bravo' },
-    { emoji: '😱', label: 'Assustado' },
-    { emoji: '😍', label: 'Apaixonado' },
-    { emoji: '😴', label: 'Cansado' },
-    { emoji: '📝', label: 'Outro' },
-  ];
+  const emocoes = ["😀 Feliz", "😢 Triste", "😠 Bravo", "😨 Com medo", "😐 Neutro"];
 
-  const sugestoes = {
-    Feliz: 'Compartilhe sua alegria com alguém ou dance sua música favorita!',
-    Triste: 'Escreva sobre o que está sentindo ou escute uma música suave.',
-    Bravo: 'Respire fundo. Que tal uma caminhada ou meditação?',
-    Assustado: 'Converse com alguém de confiança ou assista algo leve.',
-    Apaixonado: 'Escreva uma mensagem carinhosa ou faça algo criativo.',
-    Cansado: 'Descanse um pouco. Um cochilo ou uma pausa pode ajudar.',
-  };
-
-  const handleClick = (label) => {
-    setEmocaoSelecionada(label);
-    setMostrarDiario(label === 'Outro');
-  };
-
-  const handleSalvarDiario = () => {
-    console.log('Desabafo salvo:', textoDiario);
-    setTextoDiario('');
-    alert('Seu desabafo foi registrado com carinho 💜');
+  const handleSalvar = () => {
+    if (emocaoSelecionada) {
+      const historico = JSON.parse(localStorage.getItem("historicoEmocional")) || [];
+      historico.push({
+        emocao: emocaoSelecionada,
+        data: new Date().toLocaleString(),
+      });
+      localStorage.setItem("historicoEmocional", JSON.stringify(historico));
+      alert(`Emoção "${emocaoSelecionada}" registrada com carinho 💜`);
+      onClose();
+    } else {
+      alert("Selecione uma emoção antes de salvar.");
+    }
   };
 
   return (
-    <div className="popup-overlay">
+    <div className="popup-container">
       <div className="popup-content">
-        <h2 className="emocoes-titulo">Como você está se sentindo?</h2>
-
-        <div className="emocoes-container">
+        <button className="botao-fechar-canto" onClick={onClose}>❌</button>
+        <h2>Como você está se sentindo hoje?</h2>
+        <div className="emocoes-grid">
           {emocoes.map((emocao, index) => (
-            <div
+            <button
               key={index}
-              className="card-emocao"
-              onClick={() => handleClick(emocao.label)}
+              className={`emocao ${emocaoSelecionada === emocao ? "selecionada" : ""}`}
+              onClick={() => setEmocaoSelecionada(emocao)}
             >
-              <div className="emoji">{emocao.emoji}</div>
-              <div className="label">{emocao.label}</div>
-            </div>
+              {emocao}
+            </button>
           ))}
         </div>
-
-        {emocaoSelecionada && sugestoes[emocaoSelecionada] && (
-          <div className="sugestao-box">
-            <h3>Você está se sentindo <strong>{emocaoSelecionada}</strong></h3>
-            <p>{sugestoes[emocaoSelecionada]}</p>
-          </div>
-        )}
-
-        {mostrarDiario && (
-          <div className="diario-box">
-            <h3>Registre seu sentimento aqui:</h3>
-            <textarea
-              placeholder="Escreva o que está sentindo..."
-              rows="6"
-              className="diario-textarea"
-              value={textoDiario}
-              onChange={(e) => setTextoDiario(e.target.value)}
-            />
-            <button className="diario-botao" onClick={handleSalvarDiario}>
-              Salvar
-            </button>
-          </div>
-        )}
-
-        <button className="diario-botao" onClick={onClose}>
-          Fechar
+        <button className="botao-salvar" onClick={handleSalvar}>
+          Salvar Emoção
         </button>
       </div>
     </div>
@@ -86,3 +46,4 @@ function EmocoesPopup({ onClose }) {
 }
 
 export default EmocoesPopup;
+

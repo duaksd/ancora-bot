@@ -1,126 +1,106 @@
-.emocoes-wrapper {
-    padding: 1rem;
-    text-align: center;
-    background-color: #fce4ec; /* rosa claro */
-    min-height: 30vh;
-    transition: background-color 0.5s ease;
-  }
-  
-  .emocoes-titulo {
-    margin-bottom: 2rem;
-    font-size: 1.8rem;
-    color: #4a148c; /* roxo escuro */
-  }
-  
-  .emocoes-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.25rem;
-    justify-items: center;
-  }
-  
-  .card-emocao {
-    width: 150px;
-    height: 150px;
-    background: linear-gradient(135deg, #ce93d8, #fff176); /* roxo + amarelo */
-    border-radius: 12px;
-    padding: 1rem;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    color: #4a148c;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .card-emocao:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(206, 147, 216, 0.4); /* sombra roxa suave */
-  }
-  
-  .emoji {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .label {
-    font-size: 1rem;
-  }
-  
-  .sugestao-box {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background-color: #fff176; /* amarelo */
-    border-radius: 12px;
-    color: #4a148c;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  .diario-box {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background-color: #ede7f6; /* roxo claro */
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.5s ease-in-out;
-    color: #4a148c;
-  }
-  
-  .diario-textarea {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    resize: none;
-    font-size: 1rem;
-    margin-top: 1rem;
-    font-family: inherit;
-  }
-  
-  .diario-botao {
-    margin-top: 1rem;
-    padding: 0.6rem 1.2rem;
-    background-color: #ce93d8; /* roxo médio */
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .diario-botao:hover {
-    background-color: #ba68c8; /* roxo mais escuro */
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
-  
-  .popup-content {
-    background: #fce4ec;
-    padding: 2rem;
-    border-radius: 16px;
-    max-width: 600px;
-    width: 90%;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.4s ease-in-out;
-  }
-  
+:root {
+  --rosa: #f78fb3;
+  --roxo: #9b59b6;
+  --amarelo: #f9ca24;
+  --branco: #ffffff;
+  --roxo-claro: #dcd6f7;
+}
+
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(155, 89, 182, 0.4); /* roxo translúcido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-content {
+  position: relative;
+  background-color: var(--branco);
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  border: 3px solid var(--roxo);
+  overflow: visible; /* permite que o botão ultrapasse o padding */
+}
+
+.botao-fechar-canto {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%); /* ajusta para o canto externo */
+  background: var(--branco);
+  border: 2px solid var(--roxo);
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--roxo);
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+.popup-content h2 {
+  color: var(--roxo);
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.emocoes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+
+.emocao {
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  border: 2px solid var(--rosa);
+  border-radius: 10px;
+  background-color: var(--roxo-claro);
+  color: var(--roxo);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.emocao:hover {
+  background-color: var(--rosa);
+  color: var(--branco);
+}
+
+.emocao.selecionada {
+  background-color: var(--amarelo);
+  color: var(--roxo);
+  font-weight: bold;
+  box-shadow: 0 0 0 2px var(--rosa);
+}
+
+.botao-salvar {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--rosa);
+  color: var(--branco);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.botao-salvar:hover {
+  background-color: var(--roxo);
+}
