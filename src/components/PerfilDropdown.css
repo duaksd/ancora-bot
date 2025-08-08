@@ -1,74 +1,180 @@
+/* Container fixado no canto superior direito */
 .perfil-dropdown {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 500;
-  font-family: 'Quicksand', sans-serif;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  font-family: Quicksand, sans-serif;
 }
 
+/* Topo com ícone do diário e avatar */
+.perfil-topo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Ícone do diário */
+.botao-diario {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.3s;
+  color: #555;
+}
+
+.botao-diario:hover {
+  transform: scale(1.1);
+}
+
+.botao-diario.ativo {
+  color: #b03f6d;
+}
+
+/* Avatar do usuário */
 .perfil-avatar {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 6px rgba(0,0,0,0.2);
+  object-fit: cover;
+  border: 2px solid #b03f6d;
 }
 
+/* Dropdown de perfil */
 .dropdown-conteudo {
   position: absolute;
-  top: 60px;
+  top: 70px;
   right: 0;
   background-color: #fff;
+  padding: 1.5rem;
   border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  width: 280px;
+  text-align: left;
+  z-index: 100;
+}
+
+/* Popup do diário emocional */
+.popup-diario {
+  position: absolute;
+  top: 70px;
+  right: 300px; /* afastado do dropdown */
+  width: 280px;
+  background-color: #fff;
+  border: 1px solid #ccc;
   padding: 1rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  width: 260px;
-  animation: fadeIn 0.3s ease forwards;
+  border-radius: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 99;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: aparecer 0.3s forwards;
 }
 
-.perfil-nome {
-  font-weight: bold;
-  color: #b03f6d;
-  margin-right: 0.5rem;
+@keyframes aparecer {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.perfil-email {
+/* Conteúdo do diário */
+.popup-diario ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.popup-diario li {
+  margin-bottom: 0.5rem;
   font-size: 0.9rem;
-  color: #444;
+}
+
+.diario-data {
+  font-weight: bold;
+  color: #555;
+}
+
+.diario-humor {
+  color: #b03f6d;
+  font-weight: 500;
+}
+
+.diario-sugestao {
+  color: #333;
+}
+
+/* Informações do perfil */
+.perfil-nome {
+  font-size: 1.2rem;
+  color: #b03f6d;
   margin-bottom: 0.5rem;
 }
 
+.perfil-email {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.perfil-historico {
+  margin-top: 1rem;
+}
+
+.perfil-historico ul {
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Campos de edição */
+.edicao input,
+.edicao select {
+  display: block;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  width: 90%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Botões */
+.botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
 button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
   background-color: #b03f6d;
   color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.4rem 0.8rem;
-  margin-top: 0.4rem;
-  cursor: pointer;
-  width: 100%;
   font-size: 0.9rem;
 }
 
 button.excluir {
-  background-color: #f7d2d2;
-  color: #912b56;
+  background-color: #e74c3c;
 }
 
-.edicao input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 0.4rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+/* Link para alterar senha */
+.link-senha {
+  color: #b03f6d;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  text-align: center;
 }
 
-.perfil-historico {
-  margin-top: 0.8rem;
-  font-size: 0.85rem;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Mensagem de sucesso */
+.mensagem-sucesso {
+  margin-top: 1rem;
+  color: #2ecc71;
+  font-size: 0.9rem;
+  text-align: center;
 }

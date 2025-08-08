@@ -6,14 +6,28 @@ function EmocoesPopup({ onClose }) {
 
   const emocoes = ["😀 Feliz", "😢 Triste", "😠 Bravo", "😨 Com medo", "😐 Neutro"];
 
+  const gerarSugestao = (emocao) => {
+    if (emocao.includes("Feliz")) return "Continue espalhando essa alegria!";
+    if (emocao.includes("Triste")) return "Tudo bem se sentir assim. Cuide de você.";
+    if (emocao.includes("Bravo")) return "Respire fundo. Você merece paz.";
+    if (emocao.includes("Com medo")) return "Você é mais forte do que imagina.";
+    if (emocao.includes("Neutro")) return "Que tal fazer algo que te inspire?";
+    return "Estamos aqui com você.";
+  };
+
   const handleSalvar = () => {
     if (emocaoSelecionada) {
       const historico = JSON.parse(localStorage.getItem("historicoEmocional")) || [];
-      historico.push({
-        emocao: emocaoSelecionada,
-        data: new Date().toLocaleString(),
-      });
+
+      const novaEntrada = {
+        humor: emocaoSelecionada,
+        sugestao: gerarSugestao(emocaoSelecionada),
+        data: new Date().toLocaleDateString("pt-BR"),
+      };
+
+      historico.push(novaEntrada);
       localStorage.setItem("historicoEmocional", JSON.stringify(historico));
+
       alert(`Emoção "${emocaoSelecionada}" registrada com carinho 💜`);
       onClose();
     } else {
@@ -46,4 +60,3 @@ function EmocoesPopup({ onClose }) {
 }
 
 export default EmocoesPopup;
-
